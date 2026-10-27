@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>Samuel Kwame Yeboah</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: two columns on desktop. Left: sticky intro, section nav with active indicator, links. Right: scrolling sections. Stacks to one column on phones. */
+:root{
+  --bg:#F8F8F6; --surface:#FFFFFF; --hover:#F0F2EF; --ink:#15181C; --muted:#5E646C; --faint:#8A9097; --line:#E3E5E1;
+  --accent:#0B7A57; --accent-soft:#E2F2EB; --warn:#C2412B;
+  --sans:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1113; --surface:#151A1D; --hover:#171D20; --ink:#E9ECEE; --muted:#9AA3AA; --faint:#6E777E; --line:#242B30;
+  --accent:#4CCB9C; --accent-soft:#12302A; --warn:#FF8066; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1113; --surface:#151A1D; --hover:#171D20; --ink:#E9ECEE; --muted:#9AA3AA; --faint:#6E777E; --line:#242B30;
+  --accent:#4CCB9C; --accent-soft:#12302A; --warn:#FF8066; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));padding-block:0}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+::selection{background:var(--accent-soft)}
+.spot{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(520px circle at var(--x,-999px) var(--y,-999px),var(--accent-soft),transparent 70%);opacity:.55}
+
+.shell{position:relative;z-index:1;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:64px}
+.side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding-block:88px 72px}
+.main{padding-block:88px 96px;min-width:0}
+
+/* intro */
+.status{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);padding:5px 12px 5px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+h1{font-size:clamp(38px,4.6vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1.02;margin:22px 0 10px;text-wrap:balance}
+.title{font-size:19px;font-weight:500;margin:0;color:var(--ink)}
+.pitch{color:var(--muted);max-width:34ch;margin:14px 0 0}
+
+.nav{list-style:none;margin:56px 0 0;padding:0;display:grid;gap:4px}
+.nav a{display:inline-flex;align-items:center;gap:14px;padding:8px 0;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);transition:color .2s}
+.nav a::before{content:"";height:1px;width:32px;background:currentColor;transition:width .25s ease}
+.nav a:hover,.nav a.on{color:var(--ink)}
+.nav a:hover::before,.nav a.on::before{width:64px}
+
+.links{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);transition:border-color .2s,transform .2s}
+.pill:hover{border-color:var(--accent)}
+.pill.solid{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.pill svg{width:16px;height:16px}
+
+/* sections */
+section{scroll-margin-top:72px}
+section+section{margin-top:112px}
+.eyebrow{display:none;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin:0 0 20px}
+.about p{color:var(--muted);margin:0 0 16px;max-width:62ch}
+.about p strong{color:var(--ink);font-weight:500}
+
+/* card list (projects / experience / research) */
+.list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.item{position:relative;display:grid;gap:20px;padding:20px;margin-inline:-20px;border-radius:12px;transition:background .2s,opacity .2s,box-shadow .2s}
+.item>*{min-width:0}
+.item.row{grid-template-columns:120px minmax(0,1fr)}
+@media (hover:hover) and (min-width:1024px){
+  .list:hover .item:not(:hover){opacity:.5}
+  .item:hover{background:var(--hover);box-shadow:inset 0 0 0 1px var(--line)}
+}
+.when{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);padding-top:4px;font-variant-numeric:tabular-nums}
+.item h3{font-size:17px;font-weight:600;margin:0;line-height:1.35;letter-spacing:-.01em}
+.item h3 a::after{content:"";position:absolute;inset:0;border-radius:12px}
+.item h3 .arrow{display:inline-block;margin-left:4px;color:var(--faint);transition:transform .2s,color .2s}
+.item:hover h3 .arrow{transform:translate(3px,-3px);color:var(--accent)}
+.item:hover h3{color:var(--accent)}
+.org{color:var(--muted);font-weight:400}
+.item p{margin:8px 0 0;color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding:0;list-style:none}
+.tags li{font-family:var(--mono);font-size:11.5px;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.badge{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:5px;border:1px solid var(--line);color:var(--muted);margin-left:6px;vertical-align:2px;white-space:nowrap}
+.badge.live{border-color:var(--accent);color:var(--accent)}
+
+.thumb{border:1px solid var(--line);border-radius:8px;background:var(--surface);overflow:hidden;aspect-ratio:4/3;max-width:100%}
+.thumb svg{display:block;width:100%;height:100%}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.facts div{font-size:13px;color:var(--muted);line-height:1.5}
+.facts b{display:block;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:2px}
+
+.more{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:14px;border-top:1px solid var(--line);padding-top:24px}
+.more li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;font-size:15px;color:var(--muted)}
+.more li>span:first-child{font-weight:600;color:var(--ink)}
+
+.skills{display:grid;gap:22px}
+.skills>div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px}
+.skills h3{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin:6px 0 0}
+.skills .tags{margin:0}
+.skills .tags li{background:transparent;border:1px solid var(--line);color:var(--ink)}
+
+.contact h2{font-size:clamp(26px,3.4vw,34px);font-weight:600;letter-spacing:-.025em;line-height:1.15;margin:0 0 12px;text-wrap:balance}
+.contact p{color:var(--muted);margin:0 0 24px;max-width:52ch}
+.mail{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.mail code{font-family:var(--mono);font-size:15px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);user-select:all;overflow-wrap:anywhere}
+button.pill{font-family:var(--sans);cursor:pointer;color:var(--ink)}
+footer{margin-top:96px;font-size:13px;color:var(--faint);max-width:52ch}
+
+@media (max-width:1023px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .side{position:static;height:auto;padding-block:56px 16px;gap:28px}
+  .nav{display:none}
+  .main{padding-block:24px 64px}
+  .eyebrow{display:block;position:sticky;top:0;z-index:5;margin-inline:-24px;padding:14px 24px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px)}
+  section+section{margin-top:72px}
+  .item{margin-inline:0;padding:0}
+}
+@media (max-width:620px){
+  .item.row,.more li,.skills>div{grid-template-columns:1fr;gap:8px}
+  .facts{grid-template-columns:1fr}
+  .thumb{max-width:280px}
+}
+</style>
+
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<div class="shell">
+  <aside class="side">
+    <div>
+      <span class="status"><i></i>Open to fintech, risk and analyst roles</span>
+      <h1>Samuel Kwame Yeboah</h1>
+      <p class="title">Quantitative finance · Fintech builder</p>
+      <p class="pitch">I turn financial data into products and decisions for African markets, from fraud detection to credit scoring for informal traders.</p>
+      <ul class="nav" id="nav">
+        <li><a href="#about" class="on">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="links">
+      <a class="pill solid" href="#contact">Get in touch</a>
+      <a class="pill" href="https://www.linkedin.com/in/samuel-kwame-yeboah-mphil-75b00b1b4" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.75h4V21H3V9.75Zm7 0h3.8v1.6h.06c.53-1 1.84-2.05 3.78-2.05 4.04 0 4.79 2.62 4.79 6.04V21h-4v-5.02c0-1.2-.02-2.74-1.67-2.74-1.67 0-1.93 1.3-1.93 2.65V21h-4V9.75Z"/></svg>LinkedIn</a>
+      <a class="pill" href="https://claude.ai/artifact/8ZeEcY5FCw2HRsBn3omhwA" target="_blank" rel="noopener">CV ↗</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section id="about" class="about" aria-label="About">
+      <h2 class="eyebrow">About</h2>
+      <p>I’m a finance graduate from the <strong>University of Ghana Business School</strong> with an MPhil in Finance and a background in mathematics. My work sits where <strong>quantitative risk</strong> meets <strong>practical fintech</strong>.</p>
+      <p>On the research side, I model how shocks travel between commodities, stocks and currencies in African markets, using quantile and tail-dependence methods in R and Python. On the product side, I design tools for problems I see every day in Ghana: mobile money fraud, and traders who cannot get credit because they have no records.</p>
+      <p>Before academia, I spent several years in <strong>credit operations</strong> at Zenith Bank Ghana, Letshego and SIC Life, so I know how lending decisions are made on the ground.</p>
+    </section>
+
+    <section id="projects" aria-label="Projects">
+      <h2 class="eyebrow">Projects</h2>
+      <ul class="list">
+        <li class="item row">
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 160 120"><rect width="160" height="120" fill="var(--surface)"/><rect x="14" y="14" width="132" height="30" rx="5" fill="var(--hover)" stroke="var(--line)"/><rect x="22" y="23" width="70" height="4" rx="2" fill="var(--faint)"/><rect x="22" y="31" width="50" height="4" rx="2" fill="var(--faint)"/><rect x="14" y="52" width="132" height="54" rx="6" fill="var(--surface)" stroke="var(--warn)"/><rect x="22" y="61" width="58" height="7" rx="2" fill="var(--warn)"/><text x="138" y="70" text-anchor="end" font-family="Geist, sans-serif" font-size="13" font-weight="700" fill="var(--warn)">82</text><rect x="22" y="77" width="116" height="4" rx="2" fill="var(--line)"/><rect x="22" y="77" width="95" height="4" rx="2" fill="var(--warn)"/><rect x="22" y="88" width="34" height="9" rx="3" fill="var(--hover)" stroke="var(--line)"/><rect x="60" y="88" width="28" height="9" rx="3" fill="var(--hover)" stroke="var(--line)"/></svg>
+          </div>
+          <div>
+            <h3><a href="https://claude.ai/artifact/UjTdGcbaR2eThjKix4EirB" target="_blank" rel="noopener">Check Am <span class="org">· Scam detection</span><span class="arrow">↗</span></a><span class="badge live">Live demo</span></h3>
+            <p>A Ghana-first scam checker. Paste a suspicious MoMo, promo, job or investment message and get a risk score, the scam type, the red flags and what to do next.</p>
+            <div class="facts">
+              <div><b>Problem</b>No Ghana-specific, real-time fraud checker for ordinary MoMo users</div>
+              <div><b>Approach</b>Pattern library of local scam scripts, scored and explained</div>
+              <div><b>Model</b>Free tool feeds a scam database sold as a screening API to fintechs and MFIs</div>
+            </div>
+            <ul class="tags"><li>Fraud risk</li><li>Product design</li><li>JavaScript</li><li>B2B API strategy</li></ul>
+          </div>
+        </li>
+        <li class="item row">
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 160 120"><rect width="160" height="120" fill="var(--surface)"/><rect x="12" y="12" width="70" height="96" rx="7" fill="var(--hover)" stroke="var(--line)"/><rect x="38" y="22" width="38" height="10" rx="4" fill="var(--ink)"/><rect x="18" y="37" width="44" height="10" rx="4" fill="var(--surface)" stroke="var(--line)"/><rect x="34" y="52" width="42" height="10" rx="4" fill="var(--ink)"/><rect x="18" y="67" width="50" height="10" rx="4" fill="var(--surface)" stroke="var(--line)"/><rect x="30" y="82" width="46" height="10" rx="4" fill="var(--ink)"/><circle cx="120" cy="48" r="22" fill="none" stroke="var(--line)" stroke-width="6"/><circle cx="120" cy="48" r="22" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-dasharray="110 138" transform="rotate(-90 120 48)"/><text x="120" y="53" text-anchor="middle" font-family="Geist, sans-serif" font-size="13" font-weight="700" fill="var(--ink)">78</text><rect x="94" y="80" width="52" height="4" rx="2" fill="var(--line)"/><rect x="94" y="80" width="44" height="4" rx="2" fill="var(--accent)"/><rect x="94" y="90" width="52" height="4" rx="2" fill="var(--line)"/><rect x="94" y="90" width="30" height="4" rx="2" fill="var(--accent)"/></svg>
+          </div>
+          <div>
+            <h3><a href="https://claude.ai/artifact/ENdaGC9wd5vk2Gq9EVhaXv" target="_blank" rel="noopener">Adwuma <span class="org">· Credit for traders</span><span class="arrow">↗</span></a><span class="badge live">Live demo</span></h3>
+            <p>Chat and voice-note bookkeeping for market traders. Entries like “Sold 10 bags for 800” become books, then a loan-readiness score with repayment capacity.</p>
+            <div class="facts">
+              <div><b>Problem</b>Informal traders have no records, so lenders cannot assess them</div>
+              <div><b>Approach</b>Deterministic scoring on consistency, margin, stability and spending</div>
+              <div><b>Model</b>Referral fees from licensed MFIs, built around BoG digital credit rules</div>
+            </div>
+            <ul class="tags"><li>Credit scoring</li><li>Financial inclusion</li><li>UX for low literacy</li><li>Regulation</li></ul>
+          </div>
+        </li>
+      </ul>
+      <ul class="more">
+        <li><span>APEX</span><span>AI investment research tool with sentiment, trade signals, fundamentals and risk notes across forex, equities and commodities.</span></li>
+        <li><span>Gold Zone</span><span>Rules-based XAUUSD strategy with a documented backtest, forward-test log and trading desk.</span></li>
+        <li><span>Risk models</span><span>Formula-driven VaR, CVaR, beta and stress-testing workbooks on Ghana Stock Exchange data, used in graduate teaching.</span></li>
+      </ul>
+    </section>
+
+    <section id="experience" aria-label="Experience">
+      <h2 class="eyebrow">Experience</h2>
+      <ul class="list">
+        <li class="item row">
+          <div class="when">2022 — Now</div>
+          <div>
+            <h3>Research Assistant <span class="org">· University of Ghana Business School</span></h3>
+            <p>Build and verify cross-market datasets and run estimation for four real estate finance manuscripts with co-authors in Ghana, South Africa, China and the US. Deliver tables, figures and draft commentary to revision deadlines.</p>
+            <ul class="tags"><li>R</li><li>Python</li><li>TVP-VAR</li><li>CAViaR</li><li>Data engineering</li></ul>
+          </div>
+        </li>
+        <li class="item row">
+          <div class="when">2023 — 2025</div>
+          <div>
+            <h3>Graduate Teaching Assistant <span class="org">· Finance, UGBS</span></h3>
+            <p>Taught tutorials for Digital Finance and Financial Risk Modelling. Set exams and marking schemes, and built teaching models on VaR, CVaR and stress testing.</p>
+            <ul class="tags"><li>Risk modelling</li><li>Digital finance</li><li>Excel</li></ul>
+          </div>
+        </li>
+        <li class="item row">
+          <div class="when">2014 — 2021</div>
+          <div>
+            <h3>Credit Operations <span class="org">· Zenith Bank Ghana, Letshego, SIC Life</span></h3>
+            <p>Loan documentation, credit file review and account monitoring across a commercial bank, a microfinance lender and a savings and loans company.</p>
+            <ul class="tags"><li>Credit analysis</li><li>Lending operations</li></ul>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="research" aria-label="Research">
+      <h2 class="eyebrow">Research</h2>
+      <ul class="list">
+        <li class="item row">
+          <div class="when">Under review</div>
+          <div>
+            <h3>Is it the export or the dollar? Commodity tail risk in African stock and currency markets</h3>
+            <p>Crashes in a country’s own export commodity reach its stock market beyond unrelated commodities, after VIX and dollar controls. Currencies follow a common dollar factor. Also corrects an upward bias in standard quantile VAR connectedness.</p>
+            <ul class="tags"><li>Cross-quantilogram</li><li>Tail risk</li><li>FX</li></ul>
+          </div>
+        </li>
+        <li class="item row">
+          <div class="when">MPhil 2025</div>
+          <div>
+            <h3>Tail risk connectedness between African stocks, global commodities and Islamic assets</h3>
+            <p>Ten years of daily data across five African markets. Connectedness is U-shaped across quantiles, so diversification weakens in both market extremes.</p>
+            <ul class="tags"><li>Quantile VAR</li><li>DCC-GARCH</li><li>Hedging</li></ul>
+          </div>
+        </li>
+      </ul>
+      <ul class="more">
+        <li><span>With others</span><span>Data and estimation for four real estate papers with Akinsomi and Abakah, including AfRES 2025 proceedings on Big Tech stocks and REITs.</span></li>
+      </ul>
+    </section>
+
+    <section aria-label="Skills">
+      <h2 class="eyebrow">Skills</h2>
+      <div class="skills">
+        <div><h3>Analysis</h3><ul class="tags"><li>Credit risk</li><li>VaR / CVaR</li><li>Stress testing</li><li>Time-series econometrics</li><li>Quantile methods</li></ul></div>
+        <div><h3>Tools</h3><ul class="tags"><li>R</li><li>Python</li><li>Excel</li><li>EViews</li><li>LaTeX</li><li>Bloomberg</li><li>Datastream</li></ul></div>
+        <div><h3>Product</h3><ul class="tags"><li>Prototyping</li><li>Business models</li><li>Fintech regulation</li><li>Research writing</li></ul></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-label="Contact">
+      <h2 class="eyebrow">Contact</h2>
+      <h2>Let’s build something useful for African finance.</h2>
+      <p>I’m looking for roles in fintech, risk and investment analysis. The fastest way to reach me is email.</p>
+      <div class="mail">
+        <code id="email">samuelyeboah432@gmail.com</code>
+        <button class="pill" id="copy" type="button">Copy email</button>
+        <a class="pill" href="https://www.linkedin.com/in/samuel-kwame-yeboah-mphil-75b00b1b4" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <footer>Designed and built by Samuel Kwame Yeboah · Accra, Ghana</footer>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+  var spot=document.getElementById('spot');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce&&window.matchMedia('(hover:hover)').matches){
+    document.addEventListener('pointermove',function(e){spot.style.setProperty('--x',e.clientX+'px');spot.style.setProperty('--y',e.clientY+'px')});
+  }
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1)});
+  function setOn(id){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+id)})}
+  function onScroll(){
+    var cur=ids[0], y=window.innerHeight*0.35;
+    ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=y)cur=id});
+    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)cur=ids[ids.length-1];
+    setOn(cur);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+  document.getElementById('copy').addEventListener('click',function(){
+    var b=this,t=document.getElementById('email').textContent;
+    var ok=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy email'},1600)};
+    var fb=function(){var r=document.createRange();r.selectNodeContents(document.getElementById('email'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'};
+    try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}
+  });
+})();
+</script>
+
+</body>
+</html>
